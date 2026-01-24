@@ -18,7 +18,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <nav style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
-        <Link to="/">Inicio</Link>
+        <Link to="/">Home</Link>
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
