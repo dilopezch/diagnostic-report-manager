@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useCounterStore } from './store/useCounterStore'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -23,6 +24,17 @@ function App() {
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
+        </p>
+      </div>
+      <div className="card">
+        <button onClick={() => useCounterStore.getState().increment()}>
+          Zustand count is {useCounterStore((s) => s.count)}
+        </button>
+        <button onClick={() => useCounterStore.getState().reset()} style={{ marginLeft: 8 }}>
+          reset
+        </button>
+        <p>
+          State managed by Zustand with devtools enabled
         </p>
       </div>
       <p className="read-the-docs">
