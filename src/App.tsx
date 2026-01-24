@@ -1,11 +1,10 @@
-import { useState } from 'react'
-import { useCounterStore } from './store/useCounterStore'
+import { Link, Route, Routes } from 'react-router-dom'
+import Home from './pages/Home'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -18,25 +17,13 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <div className="card">
-        <button onClick={() => useCounterStore.getState().increment()}>
-          Zustand count is {useCounterStore((s) => s.count)}
-        </button>
-        <button onClick={() => useCounterStore.getState().reset()} style={{ marginLeft: 8 }}>
-          reset
-        </button>
-        <p>
-          State managed by Zustand with devtools enabled
-        </p>
-      </div>
+      <nav style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
+        <Link to="/">Inicio</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="*" element={<p>404 - Not Found</p>} />
+      </Routes>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
