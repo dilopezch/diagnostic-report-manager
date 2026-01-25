@@ -5,13 +5,25 @@ import { useReportsStore } from '../../store/useReportsStore'
 export default function ReportUpload() {
   const [file, setFile] = useState<File | null>(null)
   const [uploading, setUploading] = useState(false)
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
+  const [message, setMessage] = useState<{ type: 'info' | 'success' | 'error'; text: string } | null>(null)
   const addReport = useReportsStore((state) => state.addReport)
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0] || null
     setFile(selectedFile)
-    setMessage(null)
+    setMessage({ type: 'info', text: "File selected"})
+  }
+
+  const alertColor = (messagerType: string | undefined) => {
+    if(!messagerType || messagerType === 'info'){
+      return 'blue'
+    }
+
+    if(messagerType=== 'error'){
+      return 'red'
+    }
+    
+    return 'green'
   }
 
   const handleUpload = async () => {
@@ -21,14 +33,14 @@ export default function ReportUpload() {
     }
 
     setUploading(true)
-    setMessage(null)
+    setMessage({ type: 'info', text: "Uploading file..."})
 
     try {
       const newReport = await uploadReport(file)
       addReport(newReport)
       setMessage({ type: 'success', text: `File "${file.name}" uploaded` })
       setFile(null)
-      
+
       const input = document.getElementById('file-input') as HTMLInputElement
       if (input) input.value = ''
     } catch (error) {
@@ -43,31 +55,44 @@ export default function ReportUpload() {
 
   return (
     <div className="card" style={{ marginBottom: 16 }}>
-      <h3>Upload Report</h3>
-      <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 12 }}>
+      <h3 id="upload-heading">Upload Report</h3>
+      <div
+        style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 12 }}
+        role="group"
+        aria-labelledby="upload-heading"
+      >
+        <label htmlFor="file-input" style={{ display: 'block', marginBottom: 8 }}>
+          <span style={{ display: 'none' }}>Select a report file to upload</span>
+        </label>
         <input
           id="file-input"
           type="file"
           onChange={handleFileChange}
           disabled={uploading}
+          aria-label="Select report file"
+          aria-describedby="file-help"
           style={{ flex: 1 }}
         />
         <button
           onClick={handleUpload}
           disabled={!file || uploading}
+          aria-busy={uploading}
+          aria-label={uploading ? 'Uploading file' : 'Upload selected file'}
           style={{ padding: '8px 16px' }}
         >
-          {uploading ? 'Uploading...' : 'upload'}
+          {uploading ? 'Uploading...' : 'Upload'}
         </button>
       </div>
-      {message && (
-        <p style={{ 
+      <p
+          role='alert' 
+          aria-live="assertive"
+          style={{ 
           marginTop: 8, 
-          color: message.type === 'error' ? 'red' : 'green' 
-        }}>
-          {message.text}
-        </p>
-      )}
+          color: alertColor(message?.type)
+        }}          
+        >
+          {message?.text}
+        </p>      
     </div>
   )
 }

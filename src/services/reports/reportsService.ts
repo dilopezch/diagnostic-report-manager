@@ -1,4 +1,4 @@
-import { type ReportModel } from '../../features/reports/ReportModel'
+import { type ReportModel } from '../../types/ReportModel'
 import reportsData from './reports-mock.json'
 
 export async function getReports(): Promise<ReportModel[]> {

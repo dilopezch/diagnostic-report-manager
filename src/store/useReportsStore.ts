@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
-import type { ReportModel } from '../features/reports/ReportModel'
+import type { ReportModel } from '../types/ReportModel'
 import { getReports } from '../services/reports/reportsService'
 
 type ReportsState = {
