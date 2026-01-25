@@ -15,3 +15,28 @@ export async function getReports(): Promise<ReportModel[]> {
 
   return reports
 }
+
+export async function uploadReport(file: File): Promise<ReportModel> {
+
+  await new Promise((resolve) => setTimeout(resolve, 2000))
+  
+  const newId = Date.now()
+  
+  const sizeInMB = file.size / (1024 * 1024)
+  const formattedSize = sizeInMB >= 1 
+    ? `${sizeInMB.toFixed(1)}MB` 
+    : `${(file.size / 1024).toFixed(1)}KB`
+  
+  const fileType = file.type;
+  
+  const today = new Date()
+  const dateString = today.toISOString().split('T')[0]
+  
+  return {
+    id: newId,
+    name: file.name,
+    size: formattedSize,
+    type: fileType,
+    date: new Date(dateString),
+  }
+}
