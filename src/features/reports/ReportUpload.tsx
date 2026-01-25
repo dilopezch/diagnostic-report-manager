@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { uploadReport } from '../../services/reports/reportsService'
 import { useReportsStore } from '../../store/useReportsStore'
+import "../../index.css"
 
 export default function ReportUpload() {
   const [file, setFile] = useState<File | null>(null)
@@ -54,8 +55,8 @@ export default function ReportUpload() {
   }
 
   return (
-    <div className="card" style={{ marginBottom: 16 }}>
-      <h3 id="upload-heading">Upload Report</h3>
+    <div>
+      <h3 id="upload-heading" className=''>Upload Report</h3>
       <div
         style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 12 }}
         role="group"
