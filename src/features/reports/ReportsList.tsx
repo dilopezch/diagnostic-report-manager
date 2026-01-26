@@ -15,39 +15,10 @@ export default function ReportsList() {
     return reports.filter((r) => r.name.toLowerCase().includes(q))
   }, [query, reports])
 
-  if (loading) {
-    return (
-      <div className="card">
-        <p role="status" aria-live="polite">
-          Loading reports...
-        </p>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div className="card">
-        <p
-          style={{ color: 'red' }}
-          role="alert"
-          aria-live="assertive"
-        >
-          Error: {error}
-        </p>
-        <button
-          onClick={loadReports}
-          aria-label="Retry loading reports"
-        >
-          Retry
-        </button>
-      </div>
-    )
-  }
 
   return (
     <div className="flex-2 w-full min-w-0">
-      <div className="w-full md:w-[400px] lg:w-[600px]">
+      <div className="w-full">
         <label className="flex flex-col w-full">
           <div
             className="flex w-full items-stretch rounded-xl h-12 shadow-sm border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 group focus-within:ring-2 focus-within:ring-primary/20">

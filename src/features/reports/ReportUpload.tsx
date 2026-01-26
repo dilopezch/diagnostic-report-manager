@@ -85,7 +85,7 @@ export default function ReportUpload() {
           onDragEnter={handleDragEnter}
           onDragLeave={handleDragLeave}>
           <div
-            className="size-16 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+            className="size-16 rounded-full bg-blue-500/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
             <span className="material-symbols-outlined text-4xl">cloud_upload</span>
           </div>
           <div className="flex flex-col items-center gap-1" >
@@ -93,15 +93,18 @@ export default function ReportUpload() {
             </p>
             <p className="text-slate-500 dark:text-slate-400 text-sm text-center">{file ? file.name : "Drag and drop files here or click browse"}</p>
           </div>
-          <button
+          {
+            file && 
+            <button
             id='upload-btn'
-            className="mt-4 flex w-full cursor-pointer items-center justify-center rounded-lg h-12 px-6 bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-colors"
+            className="mt-4 flex w-full cursor-pointer items-center justify-center rounded-lg h-12 px-6 bg-blue-500 text-white text-sm font-bold shadow-lg shadow-primary/20 hover:bg-blue-500/90 transition-colors"
             onClick={handleUpload}
             disabled={!file || uploading}
             aria-busy={uploading}
             aria-label={uploading ? 'Uploading file' : 'Upload selected file'}>
             <span id='upload-spn' className="truncate">{uploading ? 'Uploading...' : 'Upload'}</span>
           </button>
+          }
           <input
             ref={fileInput}
             id="file-input"

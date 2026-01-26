@@ -3,8 +3,8 @@
 :root{
   --main_font: "Montserrat", sans-serif;
   --primary: #135bec;
-  --background-light: #f6f6f8;
-  --background-dark: #101622;
+  --background: #f6f6f8;
+  
 }
 
 body {
@@ -13,6 +13,13 @@ body {
   padding: 20px;
   text-align: center;
   font-family: var(--main_font);
-  background-color: var(--background-dark);
+  background-color: var(--background);
+}
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #101622;
+  }
 }
 
