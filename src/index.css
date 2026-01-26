@@ -2,6 +2,9 @@
 
 :root{
   --main_font: "Montserrat", sans-serif;
+  --primary: #135bec;
+  --background-light: #f6f6f8;
+  --background-dark: #101622;
 }
 
 body {
@@ -9,6 +12,7 @@ body {
   margin: 0 auto;
   padding: 20px;
   text-align: center;
-  font-family: var(--main_font)
+  font-family: var(--main_font);
+  background-color: var(--background-dark);
 }
 

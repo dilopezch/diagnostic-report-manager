@@ -4,8 +4,8 @@ import ReportUpload from '../features/reports/ReportUpload'
 export default function Home() {
   return (
     <>
-      <ReportUpload />
       <ReportsList />
+      <ReportUpload />
     </>
   )
 }

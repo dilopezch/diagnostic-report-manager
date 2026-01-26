@@ -46,55 +46,84 @@ export default function ReportsList() {
   }
 
   return (
-    <div className="card">
-      <h2 id="reports-heading">Diagnostic Reports</h2>
-      <div style={{ margin: '12px 0' }}>
-        <label htmlFor="search-input" style={{ display: 'block', marginBottom: 4, fontWeight: 500 }}>
-          Search by Name
+    <div className="flex-2 w-full min-w-0">
+      <div className="w-full md:w-[400px] lg:w-[600px]">
+        <label className="flex flex-col w-full">
+          <div
+            className="flex w-full items-stretch rounded-xl h-12 shadow-sm border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 group focus-within:ring-2 focus-within:ring-primary/20">
+            <div className="text-slate-400 flex items-center justify-center pl-4">
+              <span className="material-symbols-outlined">search</span>
+            </div>
+            <input
+              className="form-input w-full min-w-0 flex-1 border-none bg-transparent focus:ring-0 placeholder:text-slate-400 px-4 text-base font-normal"
+              placeholder="Search files, folders or shared assets..." 
+              value={query}
+              onChange={(e) => setQuery(e.target.value)} />
+            <div className="flex items-center pr-2">
+              <kbd
+                className="hidden sm:inline-block px-2 py-1 text-xs font-semibold text-slate-500 bg-slate-100 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">⌘K</kbd>
+            </div>
+          </div>
         </label>
-        <input
-          id="search-input"
-          type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Enter report name"
-          aria-describedby="search-help"
-          aria-controls="reports-table"
-          style={{ padding: 8, width: '100%', maxWidth: 320 }}
-        />
-        <div id="search-help" style={{ fontSize: '0.875rem', color: '#666', marginTop: 4 }}>
-          Filter reports by name. Showing {filtered.length} of {reports.length} reports.
-        </div>
       </div>
-      <table
-        id="reports-table"
-        style={{ width: '100%', borderCollapse: 'collapse', marginTop: 16 }}
-        role="table"
-        aria-labelledby="reports-heading"
-      >
-        <thead>
-          <tr style={{ borderBottom: '1px solid #ccc' }}>
-            <th scope="col" style={{ padding: 8, textAlign: 'left' }}>ID</th>
-            <th scope="col" style={{ padding: 8, textAlign: 'left' }}>Name</th>
-            <th scope="col" style={{ padding: 8, textAlign: 'left' }}>Size</th>
-            <th scope="col" style={{ padding: 8, textAlign: 'left' }}>Type</th>
-            <th scope="col" style={{ padding: 8, textAlign: 'left' }}>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filtered.map((report) => (
-            <tr key={report.id} style={{ borderBottom: '1px solid #eee' }}>
-              <td style={{ padding: 8 }}>{report.id}</td>
-              <td style={{ padding: 8 }}>{report.name}</td>
-              <td style={{ padding: 8 }}>{report.size}</td>
-              <td style={{ padding: 8 }}>{report.type}</td>
-              <td style={{ padding: 8 }}>{report.date.toLocaleDateString()}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div id="reports-info" style={{ marginTop: 12, fontSize: '0.875rem', color: '#666' }}>
-        Table shows diagnostic reports. Use search to filter by report name. Tab to navigate between cells.
+      <br></br>
+      <div
+        className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm flex flex-col">
+        <div
+          className="p-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
+          <h3 className="font-bold text-slate-800 dark:text-white flex items-center gap-2 text-lg">
+            Files <span
+              className="bg-primary/10 text-primary text-xs px-2.5 py-0.5 rounded-full font-medium">{reports.length} Total</span>
+          </h3>
+
+        </div>
+        <div className="@container overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-slate-50 dark:bg-slate-900/50">
+                <th
+                  className="px-6 py-4 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider w-20">
+                  ID</th>
+                <th
+                  className="px-6 py-4 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
+                  Name</th>
+                <th
+                  className="px-6 py-4 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider w-32">
+                  Size</th>
+                <th
+                  className="px-6 py-4 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider w-32">
+                  Type</th>
+                <th
+                  className="px-6 py-4 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider w-40">
+                  Date</th>
+
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+
+              {filtered.map((report) => (
+                <tr key={report.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
+                  <td className="px-6 py-4 text-slate-400 text-sm">{report.id}</td>
+                  <td className="px-6 py-4">
+                    <div className="flex items-center gap-3">
+                      <span
+                        className="text-slate-900 dark:text-white font-semibold text-sm">{report.name}</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 text-slate-500 dark:text-slate-400 text-sm">{report.size}</td>
+                  <td className="px-6 py-4">
+                    <span
+                      className="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">{report.type}</span>
+                  </td>
+                  <td className="px-6 py-4 text-slate-500 dark:text-slate-400 text-sm">{report.date.toLocaleDateString()}
+                  </td>
+                </tr>
+              ))}
+
+
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   )
