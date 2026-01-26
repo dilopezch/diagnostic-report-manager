@@ -25,7 +25,7 @@ A modern diagnostic report management system built with React, TypeScript, and V
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/diagnostic-report-manager.git
+git clone https://github.com/dilopezch/diagnostic-report-manager.git
 cd diagnostic-report-manager
 ```
 
@@ -49,6 +49,42 @@ npm run preview
 
 # Run ESLint
 npm run lint
+
+# Run unit tests with Vitest
+npm test
+
+# Run tests with UI interface
+npm run test:ui
+
+# Run tests with coverage report
+npm run test:coverage
+```
+
+### Testing
+
+The project uses **Vitest** and **React Testing Library** for comprehensive unit testing.
+
+```bash
+# Run tests in watch mode (recommended during development)
+npm test
+
+# Run tests once (useful for CI/CD)
+npm test -- --run
+
+# Open interactive test UI in browser
+npm run test:ui
+
+# Generate coverage report
+npm run test:coverage
+```
+
+**Test Coverage:**
+- ✅ Component tests (ErrorBoundary, LoadingFallback, SuspenseBoundary, etc.)
+- ✅ Service layer tests (reportsService)
+- ✅ State management tests (Zustand store)
+- ✅ 40+ tests covering critical functionality
+
+See [TESTING.md](TESTING.md) for detailed testing documentation.
 ```
 
 ---
