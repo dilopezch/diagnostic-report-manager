@@ -1,7 +1,10 @@
+import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Home from './pages/Home'
 import ErrorBoundary from './components/ErrorBoundary'
+import LoadingFallback from './components/LoadingFallback'
 
+
+const Home = lazy(() => import('./pages/Home'))
 
 function App() {
 
@@ -15,10 +18,12 @@ function App() {
             
             </div>
             <div className="flex flex-col lg:flex-row gap-8 items-start">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="*" element={<p>404 - Not Found</p>} />
-              </Routes>
+              <Suspense fallback={<LoadingFallback message="Loading page..." />}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="*" element={<p>404 - Not Found</p>} />
+                </Routes>
+              </Suspense>
             </div>
           </main>
 

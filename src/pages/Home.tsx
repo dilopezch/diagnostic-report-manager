@@ -1,15 +1,22 @@
-import ReportsList from '../features/reports/ReportsList'
-import ReportUpload from '../features/reports/ReportUpload'
+import { lazy, Suspense } from 'react'
 import FeatureErrorBoundary from '../components/FeatureErrorBoundary'
+import LoadingFallback from '../components/LoadingFallback'
+
+const ReportsList = lazy(() => import('../features/reports/ReportsList'))
+const ReportUpload = lazy(() => import('../features/reports/ReportUpload'))
 
 export default function Home() {
   return (
     <>
       <FeatureErrorBoundary featureName="Reports List">
-        <ReportsList />
+        <Suspense fallback={<LoadingFallback message="Loading reports..." size="medium" />}>
+          <ReportsList />
+        </Suspense>
       </FeatureErrorBoundary>
       <FeatureErrorBoundary featureName="Report Upload">
-        <ReportUpload />
+        <Suspense fallback={<LoadingFallback message="Loading upload form..." size="small" />}>
+          <ReportUpload />
+        </Suspense>
       </FeatureErrorBoundary>
     </>
   )
