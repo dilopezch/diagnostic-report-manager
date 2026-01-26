@@ -27,7 +27,7 @@ export default function ReportsList() {
             </div>
             <input
               className="form-input w-full min-w-0 flex-1 border-none bg-transparent focus:ring-0 placeholder:text-slate-400 px-4 text-base font-normal"
-              placeholder="Search files, folders or shared assets..." 
+              placeholder="Search files, folders or shared assets..."
               value={query}
               onChange={(e) => setQuery(e.target.value)} />
             <div className="flex items-center pr-2">
@@ -49,6 +49,15 @@ export default function ReportsList() {
 
         </div>
         <div className="@container overflow-x-auto">
+          {loading &&
+            <div
+              className="flex gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-500/10 border border-green-100 dark:border-green-500/20">
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-bold text-green-900 dark:text-green-100">Loading reports... </p>
+              </div>
+            </div>
+          }
+
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-slate-50 dark:bg-slate-900/50">
@@ -71,7 +80,6 @@ export default function ReportsList() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-
               {filtered.map((report) => (
                 <tr key={report.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
                   <td className="px-6 py-4 text-slate-400 text-sm">{report.id}</td>
@@ -90,8 +98,6 @@ export default function ReportsList() {
                   </td>
                 </tr>
               ))}
-
-
             </tbody>
           </table>
         </div>

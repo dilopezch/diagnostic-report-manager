@@ -3,7 +3,7 @@ import reportsData from './reports-mock.json'
 
 export async function getReports(): Promise<ReportModel[]> {
   
-  await new Promise((resolve) => setTimeout(resolve, 500))
+  await new Promise((resolve) => setTimeout(resolve, 2000))
 
   const reports: ReportModel[] = reportsData.map((item) => ({
     id: item.id,
